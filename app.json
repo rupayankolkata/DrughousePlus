@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "medicine-app",
-    "slug": "medicine-app",
+    "name": "Drughouse Plus",
+    "slug": "drughouse-plus",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -20,10 +20,16 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.subhasishtech.medicineapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "ad73a57d-f57d-4137-979f-fdf1a8e9ef82"
+      }
     }
   }
 }
