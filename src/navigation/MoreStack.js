@@ -6,6 +6,7 @@ import OrdersScreen from "../screens/OrdersScreen";
 import AccountScreen from "../screens/AccountScreen";
 import AboutUsScreen from "../screens/AboutUsScreen";
 import TermsScreen from "../screens/TermsScreen";
+import PrivacyPolicyScreen from "../screens/PrivacyPolicyScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -61,6 +62,17 @@ export default function MoreStack() {
         component={TermsScreen}
         options={{
           title: "Terms and Conditions",
+          headerTitleAlign: "center",
+          headerStyle: { backgroundColor: "#3193ac" },
+          headerTintColor: "#fff",
+        }}
+      />
+      {/* Terms with title */}
+      <Stack.Screen
+        name="Privacy"
+        component={PrivacyPolicyScreen}
+        options={{
+          title: "Privacy Policy",
           headerTitleAlign: "center",
           headerStyle: { backgroundColor: "#3193ac" },
           headerTintColor: "#fff",

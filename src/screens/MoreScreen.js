@@ -37,6 +37,13 @@ export default function MoreScreen() {
       >
         <Text style={styles.buttonText}>Terms & Conditions</Text>
       </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("Privacy")}
+      >
+        <Text style={styles.buttonText}>Privacy Policy</Text>
+      </TouchableOpacity>
     </View>
   );
 }

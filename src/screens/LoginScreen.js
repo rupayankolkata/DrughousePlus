@@ -8,9 +8,10 @@ import {
   StyleSheet,
   Image,
   KeyboardAvoidingView,
+  ScrollView,
   Platform,
   Dimensions,
-  Alert, 
+  Alert,
   ActivityIndicator,
 } from "react-native";
 import Swiper from "react-native-swiper";
@@ -24,7 +25,7 @@ export default function LoginScreen({ navigation }) {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = async() => {
+  const handleLogin = async () => {
     // 🚀 For now, just redirect to Dashboard
     //navigation.replace("MainTabs");
     setLoading(true);
@@ -40,7 +41,10 @@ export default function LoginScreen({ navigation }) {
       }
     } catch (err) {
       console.log(err);
-      Alert.alert("Error", err.response?.data?.message || "Something went wrong");
+      Alert.alert(
+        "Error",
+        err.response?.data?.message || "Something went wrong"
+      );
     } finally {
       setLoading(false);
     }
@@ -52,96 +56,102 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <KeyboardAvoidingView
-      style={styles.container}
+      style={{ flex: 1 }}
       behavior={Platform.OS === "ios" ? "padding" : undefined}
     >
-      <Image
-        source={require("../../assets/logo.png")}
-        style={styles.logo}
-        resizeMode="contain"
-      />
-
-      {/* Image Slider */}
-      <View style={styles.sliderContainer}>
-        <Swiper
-          autoplay
-          autoplayTimeout={3}
-          showsPagination={true}
-          dotStyle={styles.dot}
-          activeDotStyle={styles.activeDot}
-        >
-          <Image
-            source={require("../../assets/slider1.jpg")}
-            style={styles.slideImage}
-            resizeMode="cover"
-          />
-          <Image
-            source={require("../../assets/slider2.jpg")}
-            style={styles.slideImage}
-            resizeMode="cover"
-          />
-          <Image
-            source={require("../../assets/slider3.jpg")}
-            style={styles.slideImage}
-            resizeMode="cover"
-          />
-        </Swiper>
-      </View>
-
-      {/* Logo */}
-
-      {/* Form */}
-      <View style={styles.form}>
-        <TextInput
-          style={styles.input}
-          placeholder="Email or Mobile number"
-          keyboardType="email-address"
-          autoCapitalize="none"
-          value={email}
-          onChangeText={setEmail}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          secureTextEntry
-          value={password}
-          onChangeText={setPassword}
+      <ScrollView
+        contentContainerStyle={styles.container}
+        keyboardShouldPersistTaps="handled"
+      >
+        <Image
+          source={require("../../assets/logo.png")}
+          style={styles.logo}
+          resizeMode="contain"
         />
 
-        {/*<TouchableOpacity
+        {/* Image Slider */}
+        <View style={styles.sliderContainer}>
+          <Swiper
+            autoplay
+            autoplayTimeout={3}
+            showsPagination={true}
+            dotStyle={styles.dot}
+            activeDotStyle={styles.activeDot}
+          >
+            <Image
+              source={require("../../assets/slider1.jpg")}
+              style={styles.slideImage}
+              resizeMode="contain"
+            />
+            <Image
+              source={require("../../assets/slider2.jpg")}
+              style={styles.slideImage}
+              resizeMode="contain"
+            />
+            <Image
+              source={require("../../assets/slider3.jpg")}
+              style={styles.slideImage}
+              resizeMode="contain"
+            />
+          </Swiper>
+        </View>
+
+        {/* Logo */}
+
+        {/* Form */}
+        <View style={styles.form}>
+          <TextInput
+            style={styles.input}
+            placeholder="Email or Mobile number"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            value={email}
+            onChangeText={setEmail}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            secureTextEntry
+            value={password}
+            onChangeText={setPassword}
+          />
+
+          {/*<TouchableOpacity
           style={styles.button}
           onPress={() => navigation.replace("Main")}
         >
           <Text style={styles.buttonText}>LOGIN</Text>
         </TouchableOpacity>*/}
 
-        {/*<TouchableOpacity
+          {/*<TouchableOpacity
           style={styles.button}
           onPress={() => handleLogin}
         >
           <Text style={styles.buttonText}>LOGIN</Text>
         </TouchableOpacity>*/}
 
-        <TouchableOpacity
-          style={[styles.button, loading && { backgroundColor: "#ccc" }]}
-          onPress={handleLogin}
-          disabled={loading}
-        >
-          {loading ? (
-            <ActivityIndicator color="white" />
-          ) : (
-            <Text style={styles.buttonText}>Login</Text>
-          )}
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.button, loading && { backgroundColor: "#ccc" }]}
+            onPress={handleLogin}
+            disabled={loading}
+          >
+            {loading ? (
+              <ActivityIndicator color="white" />
+            ) : (
+              <Text style={styles.buttonText}>Login</Text>
+            )}
+          </TouchableOpacity>
 
-
-        <TouchableOpacity onPress={() => navigation.navigate("ForgotPassword")}>
-          <Text style={styles.link}>Forgot Password?</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-          <Text style={styles.link}>Don’t have an account? Register</Text>
-        </TouchableOpacity>
-      </View>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("ForgotPassword")}
+          >
+            <Text style={styles.link}>Forgot Password?</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+            <Text style={styles.link}>Don’t have an account? Register</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 }
@@ -151,7 +161,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     padding: 20,
   },
   sliderContainer: {
@@ -176,7 +186,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     marginHorizontal: 3,
   },
-  logo: { width: 200, height: 200,  marginBottom: 20 },
+  logo: { width: 200, height: 200, marginBottom: 20 },
   form: { width: "100%" },
   input: {
     backgroundColor: "#fff",
