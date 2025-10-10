@@ -223,27 +223,25 @@ export default function DashboardScreen({ navigation }) {
                 />
                 <Text style={styles.medicineName}>{item.name}</Text>
                 {/* Price Section */}
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    marginVertical: 4,
-                  }}
-                >
-                  {/* Show discounted price */}
-                  <Text style={styles.medicinePrice}>₹{item.price}</Text>
-
-                  {/* If MRP exists and greater than price, show strike + discount */}
-                  {item.mrp && item.mrp > item.price && (
-                    <>
-                      <Text style={styles.mrp}> ₹{item.mrp}</Text>
+                <View style={{ marginVertical: 4 }}>
+                  {/* Top row: Price + Discount */}
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <Text style={styles.medicinePrice}>₹{item.price}</Text>
+                    {item.mrp && item.mrp > item.price && (
                       <Text style={styles.discount}>
                         {" "}
                         {parseFloat(item.discount).toFixed(0)}%
                       </Text>
-                    </>
+                    )}
+                  </View>
+
+                  {/* Bottom row: Crossed MRP (only if it exists and greater than price) */}
+                  {item.mrp && item.mrp > item.price && (
+                    <Text style={styles.mrp}>₹{item.mrp}</Text>
                   )}
                 </View>
+
+                <View style={{ flex: 1 }} />
 
                 {/* Add to cart button */}
                 <TouchableOpacity
@@ -285,6 +283,7 @@ export default function DashboardScreen({ navigation }) {
               <TouchableOpacity
                 key={item.id}
                 style={styles.medicineCard}
+                activeOpacity={0.8}
                 onPress={() =>
                   navigation.navigate("ProductDetails", { product: item })
                 }
@@ -301,27 +300,25 @@ export default function DashboardScreen({ navigation }) {
                 />
                 <Text style={styles.medicineName}>{item.name}</Text>
                 {/* Price Section */}
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    marginVertical: 4,
-                  }}
-                >
-                  {/* Show discounted price */}
-                  <Text style={styles.medicinePrice}>₹{item.price}</Text>
-
-                  {/* If MRP exists and greater than price, show strike + discount */}
-                  {item.mrp && item.mrp > item.price && (
-                    <>
-                      <Text style={styles.mrp}> ₹{item.mrp}</Text>
+                <View style={{ marginVertical: 4 }}>
+                  {/* Top row: Price + Discount */}
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <Text style={styles.medicinePrice}>₹{item.price}</Text>
+                    {item.mrp && item.mrp > item.price && (
                       <Text style={styles.discount}>
                         {" "}
                         {parseFloat(item.discount).toFixed(0)}%
                       </Text>
-                    </>
+                    )}
+                  </View>
+
+                  {/* Bottom row: Crossed MRP (only if it exists and greater than price) */}
+                  {item.mrp && item.mrp > item.price && (
+                    <Text style={styles.mrp}>₹{item.mrp}</Text>
                   )}
                 </View>
+
+                <View style={{ flex: 1 }} />
 
                 {/* Add to cart button */}
                 <TouchableOpacity
@@ -556,7 +553,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   addToCartBtn: {
-    width: "100%", // 🔑 full width of card
+    width: "100%", // full width of card
     backgroundColor: "#218595",
     paddingVertical: 10,
     borderRadius: 8,

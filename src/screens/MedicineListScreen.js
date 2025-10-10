@@ -139,12 +139,15 @@ export default function MedicineListScreen({ route, navigation }) {
         style={styles.card}
         onPress={() => navigation.navigate("ProductDetails", { product: item })}
       >
-        <View>
-          <Image
-            source={{ uri: item.main_image || item.image }}
-            style={styles.cardImg}
-          />
-          <View style={styles.cardBody}>
+        <Image
+          source={{ uri: item.main_image || item.image }}
+          style={styles.cardImg}
+        />
+
+        {/* Card Body */}
+        <View style={styles.cardBody}>
+          {/* Upper content (name, manufacturer, price, etc.) */}
+          <View style={{ flex: 1 }}>
             <Text style={styles.cardTitle} numberOfLines={2}>
               {item.name}
             </Text>
@@ -160,10 +163,7 @@ export default function MedicineListScreen({ route, navigation }) {
                 marginVertical: 4,
               }}
             >
-              {/* Show discounted price */}
-              <Text style={styles.medicinePrice}>₹{item.price}</Text>
-
-              {/* If MRP exists and greater than price, show strike + discount */}
+              <Text style={styles.cardPrice}>₹{item.price}</Text>
               {item.mrp && item.mrp > item.price && (
                 <>
                   <Text style={styles.mrp}> ₹{item.mrp}</Text>
@@ -180,23 +180,24 @@ export default function MedicineListScreen({ route, navigation }) {
                 {categoryName}
               </Text>
             )}
-
-            <TouchableOpacity
-              onPress={() =>
-                addToCart({
-                  id: item.id,
-                  name: item.name,
-                  price: item.price,
-                  image: item.main_image,
-                  qty: 1,
-                })
-              }
-              style={styles.addBtn}
-            >
-              <Icon name="add-outline" size={18} color="#fff" />
-              <Text style={styles.addTxt}>ADD</Text>
-            </TouchableOpacity>
           </View>
+
+          {/* Add Button pinned at bottom */}
+          <TouchableOpacity
+            onPress={() =>
+              addToCart({
+                id: item.id,
+                name: item.name,
+                price: item.price,
+                image: item.main_image,
+                qty: 1,
+              })
+            }
+            style={styles.addBtn}
+          >
+            <Icon name="add-outline" size={18} color="#fff" />
+            <Text style={styles.addTxt}>ADD</Text>
+          </TouchableOpacity>
         </View>
       </TouchableOpacity>
     );
@@ -427,7 +428,12 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   cardImg: { width: "100%", height: 120 },
-  cardBody: { padding: 10 },
+  cardBody: {
+    padding: 10,
+    flexDirection: "column",
+    justifyContent: "space-between", // 👈 ensures ADD button stays at bottom
+    flexGrow: 1, // 👈 allows body to fill remaining space
+  },
   cardTitle: { fontSize: 14, fontWeight: "700", color: "#103844" },
   cardSub: { fontSize: 12, color: "#6e8f99", marginTop: 2 },
   cardPrice: {
