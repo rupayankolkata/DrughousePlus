@@ -81,12 +81,14 @@ export default function RegisterScreen({ navigation }) {
       <TextInput
         style={styles.input}
         placeholder="Full Name"
+        placeholderTextColor="#000"
         value={form.name}
         onChangeText={(text) => setForm({ ...form, name: text })}
       />
       <TextInput
         style={styles.input}
         placeholder="Email"
+        placeholderTextColor="#000"
         keyboardType="email-address"
         autoCapitalize="none"
         value={form.email}
@@ -95,6 +97,7 @@ export default function RegisterScreen({ navigation }) {
       <TextInput
         style={styles.input}
         placeholder="Phone"
+        placeholderTextColor="#000"
         keyboardType="phone-pad"
         value={form.phone}
         onChangeText={(text) => setForm({ ...form, phone: text })}
@@ -102,14 +105,18 @@ export default function RegisterScreen({ navigation }) {
       <TextInput
         style={styles.input}
         placeholder="Password"
+        placeholderTextColor="#000"
         secureTextEntry
         value={form.password}
+        color="#000"
         onChangeText={(text) => setForm({ ...form, password: text })}
       />
       <TextInput
         style={styles.input}
         placeholder="Confirm Password"
+        placeholderTextColor="#000"
         secureTextEntry
+        color="#000"
         value={form.confirmPassword}
         onChangeText={(text) => setForm({ ...form, confirmPassword: text })}
       />

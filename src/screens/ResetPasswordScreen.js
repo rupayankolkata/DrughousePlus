@@ -64,6 +64,8 @@ export default function ResetPasswordScreen({ route, navigation }) {
       <Text style={{ fontSize: 22, marginBottom: 20 }}>Reset Password</Text>
       <TextInput
         placeholder="New Password"
+        placeholderTextColor="#000"
+        color="#000"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
@@ -77,7 +79,9 @@ export default function ResetPasswordScreen({ route, navigation }) {
       />
       <TextInput
         placeholder="Confirm Password"
+        placeholderTextColor="#000"
         value={confirmPassword}
+        color="#000"
         onChangeText={setConfirmPassword}
         secureTextEntry
         style={{

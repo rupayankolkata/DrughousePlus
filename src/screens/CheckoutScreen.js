@@ -216,42 +216,49 @@ export default function CheckoutScreen({ navigation }) {
               <View>
                 <TextInput
                   placeholder="Full Name"
+                  placeholderTextColor="#000"
                   value={form.name}
                   editable={false}
                   style={styles.input}
                 />
                 <TextInput
                   placeholder="Email"
+                  placeholderTextColor="#000"
                   value={form.email}
                   editable={false}
                   style={styles.input}
                 />
                 <TextInput
                   placeholder="Phone"
+                  placeholderTextColor="#000"
                   value={form.phone}
                   editable={false} 
                   style={styles.input}
                 />
                 <TextInput
                   placeholder="Pincode"
+                  placeholderTextColor="#000"
                   value={form.pincode}
                   onChangeText={(t) => setForm({ ...form, pincode: t })}
                   style={styles.input}
                 />
                 <TextInput
                   placeholder="Address"
+                  placeholderTextColor="#000"
                   value={form.address}
                   onChangeText={(t) => setForm({ ...form, address: t })}
                   style={styles.input}
                 />
                 <TextInput
                   placeholder="City"
+                  placeholderTextColor="#000"
                   value={form.city}
                   onChangeText={(t) => setForm({ ...form, city: t })}
                   style={styles.input}
                 />
                 <TextInput
                   placeholder="State"
+                  placeholderTextColor="#000"
                   value={form.state}
                   onChangeText={(t) => setForm({ ...form, state: t })}
                   style={styles.input}

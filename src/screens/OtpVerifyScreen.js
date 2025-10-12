@@ -57,6 +57,7 @@ export default function OtpVerifyScreen({ route, navigation }) {
       <Text style={{ fontSize: 22, marginBottom: 20 }}>Verify OTP</Text>
       <TextInput
         placeholder="Enter 6-digit OTP"
+        placeholderTextColor="#000"
         value={otp}
         onChangeText={setOtp}
         keyboardType="numeric"

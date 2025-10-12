@@ -124,6 +124,8 @@ export default function AccountScreen() {
 
             <TextInput
               placeholder="Address"
+              placeholderTextColor="#000"
+              color="#000"
               style={styles.input}
               value={form.address}
               onChangeText={(text) => setForm({ ...form, address: text })}
@@ -131,17 +133,23 @@ export default function AccountScreen() {
             <TextInput
               placeholder="City"
               style={styles.input}
+              placeholderTextColor="#000"
+              color="#000"
               value={form.city}
               onChangeText={(text) => setForm({ ...form, city: text })}
             />
             <TextInput
               placeholder="State"
+              placeholderTextColor="#000"
+              color="#000"
               style={styles.input}
               value={form.state}
               onChangeText={(text) => setForm({ ...form, state: text })}
             />
             <TextInput
               placeholder="Zip Code"
+              placeholderTextColor="#000"
+              color="#000"
               style={styles.input}
               value={form.zip}
               onChangeText={(text) => setForm({ ...form, zip: text })}

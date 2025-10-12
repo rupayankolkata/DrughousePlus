@@ -156,22 +156,21 @@ export default function MedicineListScreen({ route, navigation }) {
               <Text style={styles.cardSub}>{manufacturerName}</Text>
             )}
 
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                marginVertical: 4,
-              }}
-            >
-              <Text style={styles.cardPrice}>₹{item.price}</Text>
-              {item.mrp && item.mrp > item.price && (
-                <>
-                  <Text style={styles.mrp}> ₹{item.mrp}</Text>
+            <View style={{ marginVertical: 4 }}>
+              {/* Row 1: Price + Discount */}
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Text style={styles.cardPrice}>₹{item.price}</Text>
+                {item.mrp && item.mrp > item.price && (
                   <Text style={styles.discount}>
-                    {" "}
+                    {"  "}
                     {parseFloat(item.discount).toFixed(0)}%
                   </Text>
-                </>
+                )}
+              </View>
+
+              {/* Row 2: MRP (strikethrough) */}
+              {item.mrp && item.mrp > item.price && (
+                <Text style={styles.mrp}>₹{item.mrp}</Text>
               )}
             </View>
 
@@ -216,7 +215,7 @@ export default function MedicineListScreen({ route, navigation }) {
           <Icon name="search-outline" size={18} color="#5d7d86" />
           <TextInput
             placeholder="Search medicine or brand"
-            placeholderTextColor="#8aa4ad"
+            placeholderTextColor="#000"
             style={styles.searchInput}
             value={query}
             onChangeText={setQuery}
@@ -347,6 +346,7 @@ export default function MedicineListScreen({ route, navigation }) {
                 style={styles.priceInput}
                 keyboardType="numeric"
                 placeholder="Min"
+                placeholderTextColor="#000"
                 value={priceMin}
                 onChangeText={setPriceMin}
               />
@@ -355,6 +355,7 @@ export default function MedicineListScreen({ route, navigation }) {
                 style={styles.priceInput}
                 keyboardType="numeric"
                 placeholder="Max"
+                placeholderTextColor="#000"
                 value={priceMax}
                 onChangeText={setPriceMax}
               />
