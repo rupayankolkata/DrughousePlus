@@ -10,6 +10,7 @@ import {
   Image,
   Modal,
   Pressable,
+  ActivityIndicator,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import axios from "axios";
@@ -35,6 +36,8 @@ export default function MedicineListScreen({ route, navigation }) {
   useEffect(() => {
     if (route.params?.categoryId) {
       setCategory(route.params.categoryId);
+      setPriceMin("");
+      setPriceMax("");
     }
   }, [route.params?.categoryId]);
 
@@ -204,6 +207,11 @@ export default function MedicineListScreen({ route, navigation }) {
 
   return (
     <View style={styles.screen}>
+      {loading && data.length === 0 && (
+        <View style={styles.loaderContainer}>
+          <ActivityIndicator size="large" color="#0A7EA4" />
+        </View>
+      )}
       {/* Header card */}
       <View style={styles.headerCard}>
         <Text style={styles.headerTitle}>Medicines</Text>
