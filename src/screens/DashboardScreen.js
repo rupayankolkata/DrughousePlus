@@ -203,63 +203,71 @@ export default function DashboardScreen({ navigation }) {
             showsHorizontalScrollIndicator={false}
             style={styles.catScroll}
           >
-            {medicines.map((item) => (
-              <TouchableOpacity
-                key={item.id}
-                style={styles.medicineCard}
-                onPress={() =>
-                  navigation.navigate("ProductDetails", { product: item })
-                }
-              >
-                <Image
-                  source={{ uri: item.main_image }}
-                  style={{
-                    width: 150,
-                    height: 150,
-                    backgroundColor: "#eee",
-                    borderRadius: 8,
-                  }}
-                  resizeMode="cover"
-                />
-                <Text style={styles.medicineName}>{item.name}</Text>
-                {/* Price Section */}
-                <View style={{ marginVertical: 4 }}>
-                  {/* Top row: Price + Discount */}
-                  <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <Text style={styles.medicinePrice}>₹{item.price}</Text>
+            {medicines && medicines.length > 0 ? (
+              medicines.map((item) => (
+                <TouchableOpacity
+                  key={item.id}
+                  style={styles.medicineCard}
+                  onPress={() =>
+                    navigation.navigate("ProductDetails", { product: item })
+                  }
+                >
+                  <Image
+                    source={{ uri: item.main_image }}
+                    style={{
+                      width: 150,
+                      height: 150,
+                      backgroundColor: "#eee",
+                      borderRadius: 8,
+                    }}
+                    resizeMode="cover"
+                  />
+
+                  <Text style={styles.medicineName}>{item.name}</Text>
+
+                  {/* Price Section */}
+                  <View style={{ marginVertical: 4 }}>
+                    {/* Top row: Price + Discount */}
+                    <View style={{ flexDirection: "row", alignItems: "center" }}>
+                      <Text style={styles.medicinePrice}>₹{item.price}</Text>
+                      {item.mrp && item.mrp > item.price && (
+                        <Text style={styles.discount}>
+                          {" "}
+                          {parseFloat(item.discount).toFixed(0)}%
+                        </Text>
+                      )}
+                    </View>
+
+                    {/* Bottom row: Crossed MRP (only if it exists and greater than price) */}
                     {item.mrp && item.mrp > item.price && (
-                      <Text style={styles.discount}>
-                        {" "}
-                        {parseFloat(item.discount).toFixed(0)}%
-                      </Text>
+                      <Text style={styles.mrp}>₹{item.mrp}</Text>
                     )}
                   </View>
 
-                  {/* Bottom row: Crossed MRP (only if it exists and greater than price) */}
-                  {item.mrp && item.mrp > item.price && (
-                    <Text style={styles.mrp}>₹{item.mrp}</Text>
-                  )}
-                </View>
+                  <View style={{ flex: 1 }} />
 
-                <View style={{ flex: 1 }} />
-
-                {/* Add to cart button */}
-                <TouchableOpacity
-                  style={styles.addToCartBtn}
-                  onPress={() =>
-                    addToCart({
-                      id: item.id,
-                      name: item.name,
-                      price: item.price,
-                      image: item.main_image,
-                      qty: 1,
-                    })
-                  }
-                >
-                  <Text style={styles.addToCartText}>+ Add</Text>
+                  {/* Add to cart button */}
+                  <TouchableOpacity
+                    style={styles.addToCartBtn}
+                    onPress={() =>
+                      addToCart({
+                        id: item.id,
+                        name: item.name,
+                        price: item.price,
+                        image: item.main_image,
+                        qty: 1,
+                      })
+                    }
+                  >
+                    <Text style={styles.addToCartText}>+ Add</Text>
+                  </TouchableOpacity>
                 </TouchableOpacity>
-              </TouchableOpacity>
-            ))}
+              ))
+            ) : (
+              <Text style={{ textAlign: "center", color: "#777", marginVertical: 10 }}>
+                No medicines found.
+              </Text>
+            )}
           </ScrollView>
         </View>
 
@@ -279,64 +287,71 @@ export default function DashboardScreen({ navigation }) {
             showsHorizontalScrollIndicator={false}
             style={styles.catScroll}
           >
-            {hotMedicines.map((item) => (
-              <TouchableOpacity
-                key={item.id}
-                style={styles.medicineCard}
-                activeOpacity={0.8}
-                onPress={() =>
-                  navigation.navigate("ProductDetails", { product: item })
-                }
-              >
-                <Image
-                  source={{ uri: item.main_image }}
-                  style={{
-                    width: 150,
-                    height: 150,
-                    backgroundColor: "#eee",
-                    borderRadius: 8,
-                  }}
-                  resizeMode="cover"
-                />
-                <Text style={styles.medicineName}>{item.name}</Text>
-                {/* Price Section */}
-                <View style={{ marginVertical: 4 }}>
-                  {/* Top row: Price + Discount */}
-                  <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <Text style={styles.medicinePrice}>₹{item.price}</Text>
+            {hotMedicines && hotMedicines.length > 0 ? (
+              hotMedicines.map((item) => (
+                <TouchableOpacity
+                  key={item.id}
+                  style={styles.medicineCard}
+                  activeOpacity={0.8}
+                  onPress={() =>
+                    navigation.navigate("ProductDetails", { product: item })
+                  }
+                >
+                  <Image
+                    source={{ uri: item.main_image }}
+                    style={{
+                      width: 150,
+                      height: 150,
+                      backgroundColor: "#eee",
+                      borderRadius: 8,
+                    }}
+                    resizeMode="cover"
+                  />
+                  <Text style={styles.medicineName}>{item.name}</Text>
+
+                  {/* Price Section */}
+                  <View style={{ marginVertical: 4 }}>
+                    {/* Top row: Price + Discount */}
+                    <View style={{ flexDirection: "row", alignItems: "center" }}>
+                      <Text style={styles.medicinePrice}>₹{item.price}</Text>
+                      {item.mrp && item.mrp > item.price && (
+                        <Text style={styles.discount}>
+                          {" "}
+                          {parseFloat(item.discount).toFixed(0)}%
+                        </Text>
+                      )}
+                    </View>
+
+                    {/* Bottom row: Crossed MRP (only if it exists and greater than price) */}
                     {item.mrp && item.mrp > item.price && (
-                      <Text style={styles.discount}>
-                        {" "}
-                        {parseFloat(item.discount).toFixed(0)}%
-                      </Text>
+                      <Text style={styles.mrp}>₹{item.mrp}</Text>
                     )}
                   </View>
 
-                  {/* Bottom row: Crossed MRP (only if it exists and greater than price) */}
-                  {item.mrp && item.mrp > item.price && (
-                    <Text style={styles.mrp}>₹{item.mrp}</Text>
-                  )}
-                </View>
+                  <View style={{ flex: 1 }} />
 
-                <View style={{ flex: 1 }} />
-
-                {/* Add to cart button */}
-                <TouchableOpacity
-                  style={styles.addToCartBtn}
-                  onPress={() =>
-                    addToCart({
-                      id: item.id,
-                      name: item.name,
-                      price: item.price,
-                      image: item.main_image,
-                      qty: 1,
-                    })
-                  }
-                >
-                  <Text style={styles.addToCartText}>+ Add</Text>
+                  {/* Add to cart button */}
+                  <TouchableOpacity
+                    style={styles.addToCartBtn}
+                    onPress={() =>
+                      addToCart({
+                        id: item.id,
+                        name: item.name,
+                        price: item.price,
+                        image: item.main_image,
+                        qty: 1,
+                      })
+                    }
+                  >
+                    <Text style={styles.addToCartText}>+ Add</Text>
+                  </TouchableOpacity>
                 </TouchableOpacity>
-              </TouchableOpacity>
-            ))}
+              ))
+            ) : (
+              <Text style={{ textAlign: "center", color: "#777", marginVertical: 10 }}>
+                No hot medicines found.
+              </Text>
+            )}
           </ScrollView>
         </View>
         {/*<View style={styles.grid}>
